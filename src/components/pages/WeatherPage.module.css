@@ -1,0 +1,10 @@
+.weather_page {
+  border: 1px solid yellow;
+}
+
+.weather_page h1 {
+  font-size: 2.9em;
+  line-height: 1.2;
+  margin: 64px 0;
+  font-family: var(--font-secondary);
+}
