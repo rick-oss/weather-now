@@ -1,0 +1,15 @@
+.wrapper_header {
+  display: flex;
+  justify-content: space-between;
+}
+
+.button_units {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 12px 16px;
+  border-radius: 8px;
+  border: none;
+  background: var(--neutral-800);
+  cursor: pointer;
+}
