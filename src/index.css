@@ -6,9 +6,12 @@
   font-weight: 400;
   font-size: 18px;
 
-  /* CSS variables */
+  /* Font families */
   --font-primary: "DM Sans", Sans-serif;
   --font-secondary: "Bricolage Grotesque", Sans-serif;
+
+  /* Background colors */
+  --neutral-800: hsl(243, 27%, 20%);
 
   color-scheme: light dark;
   color: rgba(255, 255, 255, 0.87);
