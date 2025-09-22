@@ -1,0 +1,19 @@
+.weather_details {
+  width: 182px;
+  text-align: left;
+  padding: 20px 20px;
+  margin-top: 32px;
+  font-weight: 300;
+  border-radius: 12px;
+  color: var(--neutral-200);
+  border: 1px solid var(--neutral-600);
+  background-color: var(--neutral-800);
+}
+
+.weather_details dt {
+  margin-bottom: 24px;
+}
+
+.weather_details dd {
+  font-size: 1.7em;
+}
