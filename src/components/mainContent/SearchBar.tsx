@@ -4,12 +4,12 @@ import iconSearch from "../../assets/icon-search.svg";
 
 function SearchBar() {
   return (
-    <div className={`${styles.wrapper_search}`}>
-      <input className={styles.input_search} type="text" name="search" placeholder="Search for a place..." />
-      <i className={styles.icon_search}>
+    <div className={`${styles.search_bar}`}>
+      <input className={styles.input_search_bar} type="text" name="search" placeholder="Search for a place..." />
+      <i className={styles.icon_search_bar}>
         <img src={iconSearch} alt="" />
       </i>
-      <button className={styles.button_search}>
+      <button className={styles.button_search_bar}>
         <p>Search</p>
       </button>
     </div>

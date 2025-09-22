@@ -6,7 +6,7 @@ import iconDropdown from "../../assets/icon-dropdown.svg";
 
 function Header() {
   return (
-    <header className={styles.wrapper_header}>
+    <header className={styles.header}>
       <img src={logo} className={styles.image_logo} alt="Weather Now logo" />
       <button className={styles.button_units}>
         <img src={iconUnits} alt="" />
