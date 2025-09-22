@@ -1,0 +1,44 @@
+.weather_info {
+  max-width: 800px;
+}
+
+.weather_main_info {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 286px;
+  padding: 0 24px;
+  background: url("../../assets/bg-today-large.svg") no-repeat;
+  background-size: cover;
+}
+
+.weather_location {
+  text-align: left;
+}
+
+.weather_location p {
+  margin-top: 12px;
+  font-weight: 300;
+}
+
+.weather_temperature {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.weather_temperature img {
+  width: 120px;
+  height: 120px;
+}
+
+.weather_temperature span {
+  font-size: 5.2em;
+  font-weight: 600;
+  font-style: italic;
+}
+
+.weather_details {
+  display: flex;
+  gap: 24px;
+}
