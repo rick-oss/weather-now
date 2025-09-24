@@ -1,7 +1,3 @@
-.weather_info {
-  max-width: 800px;
-}
-
 .weather_main_info {
   display: flex;
   justify-content: space-between;
