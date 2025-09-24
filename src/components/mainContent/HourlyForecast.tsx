@@ -14,12 +14,15 @@ import HourlyForecastCard from "../ui/HourlyForecastCard";
 import DaysDropdown from "../dropdown/DaysDropdown";
 
 function HourlyForecast() {
+  const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+  const [activeDay, setActiveDay] = useState("Monday");
+
   return (
     <section className={styles.hourly_forecast}>
       <header className={styles.header_hourly_forecast}>
         <h3>Hourly forecast</h3>
-        <button>
-          <span>Tuesday</span>
+        <button onClick={() => setIsDropdownOpen(!isDropdownOpen)}>
+          <span>{activeDay}</span>
           <img src={iconDropDown} alt="" />
         </button>
       </header>
