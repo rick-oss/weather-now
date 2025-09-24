@@ -14,3 +14,11 @@
   background-color: var(--neutral-800);
   cursor: pointer;
 }
+
+.button_units:hover {
+  background-color: var(--neutral-600);
+}
+
+.button_units span {
+  font-size: 1.1em;
+}
