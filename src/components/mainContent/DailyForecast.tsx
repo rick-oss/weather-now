@@ -15,7 +15,7 @@ function DailyForecast() {
     <section className={styles.daily_forecast}>
       <h3>Daily forecast</h3>
       <div className={styles.cards_daily_forecast}>
-        <DailyForecastCard day="Ter" icon={iconRain} temp_max={20} temp_min={14} />
+        <DailyForecastCard day="Tue" icon={iconRain} temp_max={20} temp_min={14} />
         <DailyForecastCard day="Wed" icon={iconDrizzle} temp_max={21} temp_min={15} />
         <DailyForecastCard day="Thu" icon={iconSunny} temp_max={24} temp_min={14} />
         <DailyForecastCard day="Fri" icon={iconPartlyCloud} temp_max={25} temp_min={13} />
