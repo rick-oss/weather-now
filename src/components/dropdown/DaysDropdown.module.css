@@ -1,0 +1,59 @@
+.days_dropdown {
+  position: absolute;
+  width: 214px;
+  right: 0;
+  top: 44px;
+  padding: 8px 7px;
+  border-radius: 12px;
+  list-style: none;
+  z-index: 3;
+  border: 1px solid var(--neutral-600);
+  background-color: var(--neutral-800);
+  box-shadow: 0 8px 16px rgba(2, 1, 44, 0.32);
+
+  opacity: 0;
+  pointer-events: none;
+  transform: translateY(-20px);
+  transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+.days_dropdown.show {
+  opacity: 1;
+  pointer-events: auto;
+  transform: translateY(0);
+}
+
+.card_day {
+  margin-bottom: 2.5px;
+  border-radius: 8px;
+}
+
+.card_day:last-child {
+  margin-bottom: 0;
+}
+
+.card_day.active {
+  background-color: var(--neutral-700);
+}
+
+.card_day.active img {
+  opacity: 1;
+}
+
+.card_day button {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+  padding: 10px 8px;
+  background: none;
+}
+
+.card_day button span {
+  font-size: 15px;
+  font-weight: 300;
+}
+
+.card_day button img {
+  opacity: 0;
+}
