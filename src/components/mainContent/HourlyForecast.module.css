@@ -6,6 +6,7 @@
 }
 
 .header_hourly_forecast {
+  position: relative;
   display: flex;
   align-items: center;
   justify-content: space-between;
