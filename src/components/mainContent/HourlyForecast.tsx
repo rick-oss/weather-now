@@ -1,3 +1,5 @@
+import { useState } from "react";
+
 import styles from "./HourlyForecast.module.css";
 
 import iconDropDown from "../../assets/icon-dropdown.svg";
@@ -9,6 +11,7 @@ import iconSnow from "../../assets/icon-snow.webp";
 import iconFog from "../../assets/icon-fog.webp";
 
 import HourlyForecastCard from "../ui/HourlyForecastCard";
+import DaysDropdown from "../dropdown/DaysDropdown";
 
 function HourlyForecast() {
   return (
