@@ -1,0 +1,32 @@
+.hourly_forecast {
+  padding: 24px;
+  flex: 1;
+  border-radius: 20px;
+  background-color: var(--neutral-800);
+}
+
+.header_hourly_forecast {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.header_hourly_forecast h3 {
+  font-weight: 500;
+}
+
+.header_hourly_forecast button {
+  padding: 8px 16px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  background-color: var(--neutral-600);
+}
+
+.header_hourly_forecast button:hover {
+  background-color: var(--neutral-700);
+}
+
+.header_hourly_forecast button span {
+  margin-right: 12px;
+}
