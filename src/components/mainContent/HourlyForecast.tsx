@@ -25,6 +25,7 @@ function HourlyForecast() {
           <span>{activeDay}</span>
           <img src={iconDropDown} alt="" />
         </button>
+        {isDropdownOpen && <DaysDropdown isOpen={isDropdownOpen} selectedDay={activeDay} onSelectDay={setActiveDay} />}
       </header>
       <HourlyForecastCard icon={iconOvercast} hour="3 PM" temperature={20} />
       <HourlyForecastCard icon={iconPartlyCloudy} hour="4 PM" temperature={20} />
