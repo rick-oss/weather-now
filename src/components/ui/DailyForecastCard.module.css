@@ -1,0 +1,33 @@
+.daily_card {
+  width: 100px;
+  height: 165px;
+  padding: 16px 10px;
+  text-align: center;
+  border-radius: 12px;
+  background-color: var(--neutral-800);
+  border: 1px solid var(--neutral-600);
+}
+
+.daily_card p {
+  color: var(--neutral-0);
+  margin-bottom: 16px;
+}
+
+.daily_card img {
+  width: 60px;
+  height: 60px;
+  margin-bottom: 16px;
+}
+
+.temp_daily_card {
+  display: flex;
+  justify-content: space-between;
+}
+
+.temp_max {
+  color: var(--neutral-0);
+}
+
+.temp_min {
+  color: var(--neutral-200);
+}
