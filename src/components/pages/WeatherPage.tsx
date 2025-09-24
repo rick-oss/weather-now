@@ -5,6 +5,8 @@ import iconSunny from "../../assets/icon-sunny.webp";
 import Header from "../header/Header";
 import SearchBar from "../mainContent/SearchBar";
 import WeatherInfo from "../mainContent/WeatherInfo";
+import DailyForecast from "../mainContent/DailyForecast";
+import HourlyForecast from "../mainContent/HourlyForecast";
 
 function WeatherPage() {
   return (
@@ -14,12 +16,16 @@ function WeatherPage() {
       <main className={styles.main_content}>
         <SearchBar />
         <section className={styles.wrapper_content}>
-          <WeatherInfo
-            location="Berlin, Germany"
-            date="Tuesday, Aug 5, 2025"
-            temperature="20°"
-            temperature_icon={iconSunny}
-          />
+          <div className={styles.left_content}>
+            <WeatherInfo
+              location="Berlin, Germany"
+              date="Tuesday, Aug 5, 2025"
+              temperature="20°"
+              temperature_icon={iconSunny}
+            />
+            <DailyForecast />
+          </div>
+          <HourlyForecast />
         </section>
       </main>
     </div>
