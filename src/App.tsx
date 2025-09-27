@@ -1,11 +1,14 @@
 import "./App.css";
 
+import { WeatherProvider } from "./context/WeatherProvider";
 import WeatherPage from "./components/pages/WeatherPage";
 
 function App() {
   return (
     <>
-      <WeatherPage />
+      <WeatherProvider>
+        <WeatherPage />
+      </WeatherProvider>
     </>
   );
 }
