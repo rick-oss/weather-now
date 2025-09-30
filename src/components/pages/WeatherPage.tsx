@@ -8,7 +8,11 @@ import WeatherInfo from "../mainContent/WeatherInfo";
 import DailyForecast from "../mainContent/DailyForecast";
 import HourlyForecast from "../mainContent/HourlyForecast";
 
+import { useWeatherApi } from "../../hooks/useWeatherApi";
+
 function WeatherPage() {
+  useWeatherApi();
+
   return (
     <div className={styles.weather_page}>
       <Header />
