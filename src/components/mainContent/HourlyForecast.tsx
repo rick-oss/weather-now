@@ -1,21 +1,33 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 import styles from "./HourlyForecast.module.css";
 
 import iconDropDown from "../../assets/icon-dropdown.svg";
 
-import iconOvercast from "../../assets/icon-overcast.webp";
-import iconPartlyCloudy from "../../assets/icon-partly-cloudy.webp";
-import iconSunny from "../../assets/icon-sunny.webp";
-import iconSnow from "../../assets/icon-snow.webp";
-import iconFog from "../../assets/icon-fog.webp";
-
 import HourlyForecastCard from "../ui/HourlyForecastCard";
 import DaysDropdown from "../dropdown/DaysDropdown";
 
+import { useWeather } from "../../context/WeatherContext";
+import { getWeatherIcon } from "../../utils/getWeatherIcon";
+
 function HourlyForecast() {
+  const { hourlyForecast, utcOffset } = useWeather();
+
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
-  const [activeDay, setActiveDay] = useState("Monday");
+  const [activeDay, setActiveDay] = useState<string | null>(null);
+
+  useEffect(() => {
+    if (hourlyForecast) {
+      const dates = Object.keys(hourlyForecast ?? {});
+      if (dates.length > 0) {
+        setActiveDay(dates[0]);
+      }
+    }
+  }, [hourlyForecast, setActiveDay]);
+
+  const dates = Object.keys(hourlyForecast ?? {});
+  const startIndex = activeDay === dates[0] ? utcOffset ?? 0 : 0;
+  const endIndex = startIndex + 8;
 
   return (
     <section className={styles.hourly_forecast}>
@@ -27,14 +39,17 @@ function HourlyForecast() {
         </button>
         {isDropdownOpen && <DaysDropdown isOpen={isDropdownOpen} selectedDay={activeDay} onSelectDay={setActiveDay} />}
       </header>
-      <HourlyForecastCard icon={iconOvercast} hour="3 PM" temperature={20} />
-      <HourlyForecastCard icon={iconPartlyCloudy} hour="4 PM" temperature={20} />
-      <HourlyForecastCard icon={iconSunny} hour="5 PM" temperature={20} />
-      <HourlyForecastCard icon={iconOvercast} hour="6 PM" temperature={19} />
-      <HourlyForecastCard icon={iconSnow} hour="7 PM" temperature={18} />
-      <HourlyForecastCard icon={iconFog} hour="8 PM" temperature={18} />
-      <HourlyForecastCard icon={iconSnow} hour="9 PM" temperature={17} />
-      <HourlyForecastCard icon={iconOvercast} hour="10 PM" temperature={17} />
+      {activeDay &&
+        hourlyForecast?.[activeDay]
+          ?.slice(startIndex, endIndex)
+          .map((forecast, idx) => (
+            <HourlyForecastCard
+              key={idx}
+              icon={getWeatherIcon(forecast.weatherCode)}
+              hour={forecast.hour}
+              temperature={forecast.temperature}
+            />
+          ))}
     </section>
   );
 }
