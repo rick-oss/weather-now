@@ -4,16 +4,21 @@ import styles from "./DaysDropdown.module.css";
 
 import iconCheckMark from "../../assets/icon-checkmark.svg";
 
-interface DaysDropdownProps {
+import { useWeather } from "../../context/WeatherContext";
+
+type DaysDropdownProps = {
   isOpen: boolean;
-  selectedDay: string;
+  selectedDay: string | null;
   onSelectDay: (item: string) => void;
-}
+};
 
 function DaysDropdown({ isOpen, selectedDay, onSelectDay }: DaysDropdownProps) {
   const [isVisible, setIsVisible] = useState(false);
 
-  const days = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"];
+  const { hourlyForecast } = useWeather();
+
+  const dates = Object.keys(hourlyForecast ?? {});
+  const days = dates;
 
   useEffect(() => {
     if (isOpen) {
