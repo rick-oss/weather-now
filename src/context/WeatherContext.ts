@@ -24,10 +24,24 @@ interface HourlyWeather {
   temperature: number;
   weatherCode: number;
 }
-
 export type GroupedHourly = Record<string, HourlyWeather[]>;
 
-interface WeatherContextType {
+export type UnitMode = "metric" | "imperial";
+
+type Units = {
+  temperature: "celsius" | "fahrenheit";
+  windSpeed: "kmh" | "mph";
+  precipitation: "mm" | "inch";
+};
+
+export type Location = {
+  latitude: number | null;
+  longitude: number | null;
+} | null;
+
+export interface WeatherContextType {
+  currentForecast: CurrentWeather | null;
+  setCurrentForecast: (weather: CurrentWeather) => void;
   dailyForecast: DailyWeather | null;
   setDailyForecast: (weather: DailyWeather) => void;
   hourlyForecast: GroupedHourly | null;
