@@ -1,9 +1,24 @@
 import { useEffect } from "react";
+import useGeolocation from "./useGeolocation.ts";
 import { useWeather } from "../context/WeatherContext.ts";
 import type { GroupedHourly } from "../context/WeatherContext.ts";
 
+import mapboxgl from "mapbox-gl";
+
+mapboxgl.accessToken = import.meta.env.VITE_MAPBOX_API_KEY;
+
 export function useWeatherApi() {
-  const { setDailyForecast, setHourlyForecast, setUtcOffset } = useWeather();
+  const {
+    units,
+    location,
+    setLocation,
+    setCurrentForecast,
+    setDailyForecast,
+    setHourlyForecast,
+    setUtcOffset,
+    setRegion,
+  } = useWeather();
+  const { geolocation } = useGeolocation();
 
   const params = {
     latitude: 52.52,
