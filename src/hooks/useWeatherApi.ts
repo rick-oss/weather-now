@@ -50,6 +50,12 @@ export function useWeatherApi() {
   }
 
   useEffect(() => {
+    if (geolocation.latitude && geolocation.longitude) {
+      setLocation(geolocation);
+    }
+  }, [geolocation, setLocation]);
+
+  useEffect(() => {
     async function fetchWeather() {
       try {
         const response = await fetch(url);
