@@ -57,9 +57,10 @@ export function useWeatherApi() {
 
   useEffect(() => {
     async function fetchWeather() {
-      try {
-        const response = await fetch(url);
-        const data = await response.json();
+      if (location?.latitude && location?.longitude) {
+        try {
+          const response = await fetch(url);
+          const data = await response.json();
 
         if (!response.ok) {
           throw new Error("Erro ao buscar dados da API");
