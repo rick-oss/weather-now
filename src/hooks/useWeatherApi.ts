@@ -74,14 +74,74 @@ export function useWeatherApi() {
             return `${weekDai}, ${month} ${dayOfMonth}, ${year}`;
           };
 
-          if (!acc[dayWeek]) {
-            acc[dayWeek] = [];
-          }
+          const nowUTC = new Date(); // hora atual do PC em UTC
+          const cityOffset = data.utc_offset_seconds * 1000; // utc_offset_seconds da API
 
-          acc[dayWeek].push(forecast);
+          const nowCity = new Date(nowUTC.getTime() + cityOffset);
+          const nowCityStr = nowCity.toISOString().slice(0, 13) + ":00"; // "2025-09-29T15:00"
+          const dateStr = nowCity.toISOString().slice(0, 10); // 2025-09-29
 
-          return acc;
-        }, {} as GroupedHourly);
+          const newDate = new Date(dateStr + "T00:00:00");
+
+          const currentHourIndex: number = data.hourly.time.findIndex((index: string) => index === nowCityStr);
+          setUtcOffset(currentHourIndex);
+
+          // Current Forecast
+          const currentForecast = {
+            dateInfo: getDateInfo(dateStr, newDate),
+            temperature: Math.round(data.hourly.temperature_2m[currentHourIndex]),
+            feelsLike: Math.round(data.hourly.apparent_temperature[currentHourIndex]),
+            humidity: data.hourly.relative_humidity_2m[currentHourIndex],
+            windSpeed: Math.round(data.hourly.wind_speed_10m[currentHourIndex]),
+            precipitation: data.hourly.precipitation[currentHourIndex],
+            weatherCode: data.hourly.weather_code[currentHourIndex],
+          };
+          setCurrentForecast(currentForecast);
+
+          // Daily Forecast
+          const temperatures_max = data.daily.temperature_2m_max;
+          const temperature_min = data.daily.temperature_2m_min;
+          const weather_code = data.daily.weather_code;
+          const times = data.daily.time;
+          const daysWeek = times.map(shortWeekday);
+
+          const days = daysWeek.map((day: string, index: number) => ({
+            weekDay: day,
+            max_temperature: Math.round(temperatures_max[index]),
+            min_temperature: Math.round(temperature_min[index]),
+            weatherCode: weather_code[index],
+          }));
+          setDailyForecast({ days });
+
+          // Hourly Forecast
+          const hourlyTemperature = data.hourly.temperature_2m;
+          const hourlyWeatherCode = data.hourly.weather_code;
+
+          const grouped = data.hourly.time.reduce((acc: GroupedHourly, t: string, i: number) => {
+            const [data, hora] = t.split("T");
+            const dayWeek = longWeekday(data);
+
+            const forecast = {
+              hour: hora,
+              currentHour: nowCityStr,
+              temperature: Math.round(hourlyTemperature[i]),
+              weatherCode: hourlyWeatherCode[i],
+            };
+
+            if (!acc[dayWeek]) {
+              acc[dayWeek] = [];
+            }
+
+            acc[dayWeek].push(forecast);
+
+            return acc;
+          }, {} as GroupedHourly);
+          setHourlyForecast(grouped);
+        } catch (error) {
+          console.log(error);
+        }
+      }
+    }
 
         setHourlyForecast(grouped);
 
