@@ -143,15 +143,37 @@ export function useWeatherApi() {
       }
     }
 
-        setHourlyForecast(grouped);
+    fetchWeather();
+  }, [
+    location?.latitude,
+    location?.longitude,
+    url,
+    setCurrentForecast,
+    setDailyForecast,
+    setHourlyForecast,
+    setUtcOffset,
+  ]);
 
-        console.log(grouped);
-        console.log(data);
-      } catch (error) {
-        console.log(error);
+  useEffect(() => {
+    async function getRegion(lat: number, lon: number) {
+      if (lat !== null && lon !== null) {
+        try {
+          const response = await fetch(
+            `https://api.mapbox.com/geocoding/v5/mapbox.places/${lon},${lat}.json?types=place&access_token=${mapboxgl.accessToken}&limit=1`
+          );
+          const data = await response.json();
+          if (data.features.length > 0) {
+            const city = data.features[0].place_name;
+            setRegion(city);
+          }
+        } catch (err) {
+          console.log("Erro ao buscar cidade:", err);
+        }
       }
     }
 
-    fetchWeather();
-  }, [url, setDailyForecast, setHourlyForecast, setUtcOffset]);
+    if (location?.latitude != null && location?.longitude != null) {
+      getRegion(location.latitude, location.longitude);
+    }
+  }, [location, setRegion]);
 }
