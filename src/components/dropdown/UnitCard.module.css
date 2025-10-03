@@ -14,7 +14,7 @@
 }
 
 .options_unit_card {
-  margin-top: 8px;
+  margin: 4px 0 4px;
   list-style: none;
 }
 
@@ -37,6 +37,7 @@
 .options_unit_card li span {
   font-weight: 300;
   line-height: 1.05;
+  margin-right: 28px;
 }
 
 .options_unit_card li img {
