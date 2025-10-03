@@ -21,9 +21,19 @@ export function useWeatherApi() {
   const { geolocation } = useGeolocation();
 
   const params = {
-    latitude: 52.52,
-    longitude: 13.41,
-    hourly: ["temperature_2m", "weather_code"],
+    latitude: location?.latitude,
+    longitude: location?.longitude,
+    temperature_unit: units?.temperature,
+    windspeed_unit: units?.windSpeed,
+    precipitation_unit: units?.precipitation,
+    hourly: [
+      "temperature_2m",
+      "apparent_temperature",
+      "relative_humidity_2m",
+      "wind_speed_10m",
+      "precipitation",
+      "weather_code",
+    ],
     daily: ["temperature_2m_max", "temperature_2m_min", "weather_code"],
   };
 
