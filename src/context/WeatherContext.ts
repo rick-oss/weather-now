@@ -46,8 +46,15 @@ export interface WeatherContextType {
   setDailyForecast: (weather: DailyWeather) => void;
   hourlyForecast: GroupedHourly | null;
   setHourlyForecast: (weather: GroupedHourly) => void;
+  location: Location;
+  setLocation: (loc: Location) => void;
+  region: string | null;
+  setRegion: (city: string) => void;
   utcOffset: number | null;
   setUtcOffset: (offset: number) => void;
+  unitMode: UnitMode;
+  setUnitMode:  React.Dispatch<React.SetStateAction<UnitMode>>;
+  units: Units;
 }
 
 export const WeatherContext = createContext<WeatherContextType | undefined>(undefined);
