@@ -22,20 +22,18 @@
 }
 
 .units_dropdown button {
-  padding: 10px 8px;
+  width: 100%;
+  padding: 10px 0;
   border: none;
   border-radius: 8px;
+  cursor: pointer;
   background-color: var(--neutral-700);
+}
+
+.units_dropdown button:hover {
+  box-shadow: 0 0 3px hsl(0, 0%, 100%);
 }
 
 .units_dropdown button span {
   font-size: 1.2em;
-  margin-right: 30px;
-}
-
-.divider {
-  content: "";
-  height: 0;
-  width: 100%;
-  border: 1px solid var(--neutral-700);
 }
