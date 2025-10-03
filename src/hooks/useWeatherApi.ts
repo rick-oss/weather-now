@@ -37,7 +37,7 @@ export function useWeatherApi() {
     daily: ["temperature_2m_max", "temperature_2m_min", "weather_code"],
   };
 
-  const url = `https://api.open-meteo.com/v1/forecast?latitude=${params.latitude}&longitude=${params.longitude}&daily=${params.daily}&hourly=${params.hourly}&timezone=auto`;
+  const url = `https://api.open-meteo.com/v1/forecast?latitude=${params.latitude}&longitude=${params.longitude}&daily=${params.daily}&hourly=${params.hourly}&temperature_unit=${params.temperature_unit}&windspeed_unit=${params.windspeed_unit}&precipitation_unit=${params.precipitation_unit}&timezone=auto`;
 
   function shortWeekday(dateString: string) {
     const day = new Date(dateString + "T00:00:00");
