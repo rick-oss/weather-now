@@ -1,7 +1,5 @@
 import styles from "./WeatherPage.module.css";
 
-import iconSunny from "../../assets/icon-sunny.webp";
-
 import Header from "../header/Header";
 import SearchBar from "../mainContent/SearchBar";
 import WeatherInfo from "../mainContent/WeatherInfo";
@@ -21,12 +19,7 @@ function WeatherPage() {
         <SearchBar />
         <section className={styles.wrapper_content}>
           <div className={styles.left_content}>
-            <WeatherInfo
-              location="Berlin, Germany"
-              date="Tuesday, Aug 5, 2025"
-              temperature="20°"
-              temperature_icon={iconSunny}
-            />
+            <WeatherInfo />
             <DailyForecast />
           </div>
           <HourlyForecast />
