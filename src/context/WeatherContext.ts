@@ -1,12 +1,13 @@
 import { createContext, useContext } from "react";
-
-// export interface CurrentWeather {
-//   temperature: number;
-//   feels_like: number;
-//   humidity: number;
-//   wind_speed: number;
-//   precipitation: string;
-// }
+export interface CurrentWeather {
+  dateInfo: string;
+  temperature: number;
+  feelsLike: number;
+  humidity: number;
+  windSpeed: number;
+  precipitation: string;
+  weatherCode: number;
+}
 
 export interface DailyWeather {
   days: {
