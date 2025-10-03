@@ -2,31 +2,35 @@ import styles from "./WeatherInfo.module.css";
 
 import WeatherDetailsCard from "../ui/WeatherDetailsCard";
 
-interface WeatherInfoProps {
-  location: string;
-  date: string;
-  temperature: string;
-  temperature_icon: string;
-}
+import { useWeather } from "../../context/WeatherContext";
+import { getWeatherIcon } from "../../utils/getWeatherIcon";
 
-function WeatherInfo({ location, date, temperature, temperature_icon }: WeatherInfoProps) {
+function WeatherInfo() {
+  const { currentForecast, region, unitMode } = useWeather();
+
   return (
     <section className={styles.weather_info}>
       <div className={styles.weather_main_info}>
         <div className={styles.weather_location}>
-          <h2>{location}</h2>
-          <p>{date}</p>
+          <h2>{region}</h2>
+          <p>{currentForecast?.dateInfo}</p>
         </div>
         <div className={styles.weather_temperature}>
-          <img src={temperature_icon} alt="Weather icon" />
-          <span>{temperature}</span>
+          <img src={getWeatherIcon(currentForecast?.weatherCode ?? 0)} alt="Weather icon" />
+          <span>{currentForecast?.temperature}°</span>
         </div>
       </div>
       <div className={styles.weather_details}>
-        <WeatherDetailsCard detailName="Feels Like" detailValue="18°" />
-        <WeatherDetailsCard detailName="Humidity" detailValue="46%" />
-        <WeatherDetailsCard detailName="Wind" detailValue="14km/h" />
-        <WeatherDetailsCard detailName="Precipitation" detailValue="0 mm" />
+        <WeatherDetailsCard detailName="Feels Like" detailValue={`${currentForecast?.feelsLike ?? 0}°`} />
+        <WeatherDetailsCard detailName="Humidity" detailValue={`${currentForecast?.humidity ?? 0}%`} />
+        <WeatherDetailsCard
+          detailName="Wind"
+          detailValue={`${currentForecast?.windSpeed ?? 0} ${unitMode === "metric" ? "km/h" : "mph"}`}
+        />
+        <WeatherDetailsCard
+          detailName="Precipitation"
+          detailValue={`${currentForecast?.precipitation ?? 0} ${unitMode === "metric" ? "mm" : "inch"} `}
+        />
       </div>
     </section>
   );
