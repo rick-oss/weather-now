@@ -17,13 +17,33 @@ const unitMap = {
 };
 
 export function WeatherProvider({ children }: { children: ReactNode }) {
+  const [currentForecast, setCurrentForecast] = useState<CurrentWeather | null>(null);
   const [dailyForecast, setDailyForecast] = useState<DailyWeather | null>(null);
   const [hourlyForecast, setHourlyForecast] = useState<GroupedHourly | null>(null);
+  const [location, setLocation] = useState<Location>(null);
   const [utcOffset, setUtcOffset] = useState<number | null>(null);
+  const [region, setRegion] = useState<string | null>(null);
+  const [unitMode, setUnitMode] = useState<UnitMode>("metric");
 
   return (
     <WeatherContext.Provider
-      value={{ dailyForecast, setDailyForecast, hourlyForecast, setHourlyForecast, utcOffset, setUtcOffset }}
+      value={{
+        currentForecast,
+        setCurrentForecast,
+        dailyForecast,
+        setDailyForecast,
+        hourlyForecast,
+        setHourlyForecast,
+        location,
+        setLocation,
+        region,
+        setRegion,
+        utcOffset,
+        setUtcOffset,
+        unitMode,
+        setUnitMode,
+        units: unitMap[unitMode],
+      }}
     >
       {children}
     </WeatherContext.Provider>
