@@ -62,49 +62,16 @@ export function useWeatherApi() {
           const response = await fetch(url);
           const data = await response.json();
 
-        if (!response.ok) {
-          throw new Error("Erro ao buscar dados da API");
-        }
+          if (!response.ok) {
+            throw new Error("Erro ao buscar dados da API");
+          }
 
-        const nowUTC = new Date(); // hora atual do PC em UTC
-        const cityOffset = data.utc_offset_seconds * 1000; // utc_offset_seconds da API
-        const nowCity = new Date(nowUTC.getTime() + cityOffset);
-        const nowCityStr = nowCity.toISOString().slice(0, 13) + ":00"; // "2025-09-29T15:00"
-        console.log(nowCityStr);
-
-        const startIndex: number = data.hourly.time.findIndex((index: string) => index === nowCityStr);
-
-        setUtcOffset(startIndex);
-
-        // Daily Forecast
-        const temperatures_max = data.daily.temperature_2m_max;
-        const temperature_min = data.daily.temperature_2m_min;
-        const weather_code = data.daily.weather_code;
-        const times = data.daily.time;
-        const daysWeek = times.map(shortWeekday);
-
-        const days = daysWeek.map((day: string, index: number) => ({
-          weekDay: day,
-          max_temperature: Math.round(temperatures_max[index]),
-          min_temperature: Math.round(temperature_min[index]),
-          weatherCode: weather_code[index],
-        }));
-
-        setDailyForecast({ days });
-
-        // Hourly Forecast
-        const hourlyTemperature = data.hourly.temperature_2m;
-        const hourlyWeatherCode = data.hourly.weather_code;
-
-        const grouped = data.hourly.time.reduce((acc: GroupedHourly, t: string, i: number) => {
-          const [data, hora] = t.split("T");
-          const dayWeek = longWeekday(data);
-
-          const forecast = {
-            hour: hora,
-            currentHour: nowCityStr,
-            temperature: Math.round(hourlyTemperature[i]),
-            weatherCode: hourlyWeatherCode[i],
+          const getDateInfo = (weekDay: string, dateParam: Date) => {
+            const weekDai = longWeekday(weekDay);
+            const month = dateParam.toLocaleString("en-US", { month: "short" });
+            const dayOfMonth = dateParam.getDate();
+            const year = dateParam.toLocaleString("en-US", { year: "numeric" });
+            return `${weekDai}, ${month} ${dayOfMonth}, ${year}`;
           };
 
           if (!acc[dayWeek]) {
