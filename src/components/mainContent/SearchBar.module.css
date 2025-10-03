@@ -6,8 +6,9 @@
 }
 
 .input_search_bar {
-  width: 526px;
+  width: 532px;
   height: 56px;
+  font-size: 19px;
   padding: 16px 24px 16px 60px;
   border: none;
   border-radius: 12px;
