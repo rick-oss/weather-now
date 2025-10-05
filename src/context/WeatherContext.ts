@@ -50,10 +50,12 @@ export interface WeatherContextType {
   setLocation: (loc: Location) => void;
   region: string | null;
   setRegion: (city: string) => void;
+  isLoading: boolean;
+  setIsLoading: (loading: boolean) => void;
   utcOffset: number | null;
   setUtcOffset: (offset: number) => void;
   unitMode: UnitMode;
-  setUnitMode:  React.Dispatch<React.SetStateAction<UnitMode>>;
+  setUnitMode: React.Dispatch<React.SetStateAction<UnitMode>>;
   units: Units;
 }
 
