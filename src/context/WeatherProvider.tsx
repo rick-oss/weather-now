@@ -23,6 +23,7 @@ export function WeatherProvider({ children }: { children: ReactNode }) {
   const [location, setLocation] = useState<Location>(null);
   const [utcOffset, setUtcOffset] = useState<number | null>(null);
   const [region, setRegion] = useState<string | null>(null);
+  const [isLoading, setIsLoading] = useState(false);
   const [unitMode, setUnitMode] = useState<UnitMode>("metric");
 
   return (
@@ -38,6 +39,8 @@ export function WeatherProvider({ children }: { children: ReactNode }) {
         setLocation,
         region,
         setRegion,
+        isLoading,
+        setIsLoading,
         utcOffset,
         setUtcOffset,
         unitMode,
