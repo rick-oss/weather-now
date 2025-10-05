@@ -11,7 +11,7 @@
   --font-secondary: "Bricolage Grotesque", Sans-serif;
 
   /* Font colors */
-  --neutral-300: hsl(240, 6%, 70%)
+  --neutral-300: hsl(240, 6%, 70%);
   --neutral-200: hsl(250, 6%, 84%);
   --neutral-0: hsl(0, 0%, 100%);
 
