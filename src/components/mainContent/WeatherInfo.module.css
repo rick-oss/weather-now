@@ -8,6 +8,42 @@
   background-size: cover;
 }
 
+.loading {
+  height: 286px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  gap: 12px;
+  border-radius: 12px;
+  background: var(--neutral-800);
+}
+
+.loading_dots {
+  display: flex;
+  gap: 10px;
+}
+
+.loading_dots span {
+  width: 12px;
+  height: 12px;
+  background: var(--neutral-0);
+  border-radius: 50%;
+  animation: levitate 1.4s infinite both;
+}
+
+.loading_dots span:nth-child(2) {
+  animation-delay: 0.2s;
+}
+
+.loading_dots span:nth-child(3) {
+  animation-delay: 0.4s;
+}
+
+.loading_label {
+  color: var(--neutral-200);
+}
+
 .weather_location {
   text-align: left;
 }
