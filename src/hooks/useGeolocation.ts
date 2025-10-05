@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import { useWeather } from "../context/WeatherContext";
 
 interface GeoLocation {
   latitude: number | null;
@@ -10,32 +11,32 @@ const useGeolocation = () => {
     latitude: null,
     longitude: null,
   });
-  const [permissionDenied, setPermissionDenied] = useState(false);
   const [permissionStatusChecked, setPermissionStatusChecked] = useState(false);
+  const { setIsLoading } = useWeather();
 
   useEffect(() => {
+    setIsLoading(true);
     // Função de sucesso quando a geolocalização é obtida
     const getCoords = (position: GeolocationPosition) => {
       setGeoLocation({
         latitude: position.coords.latitude,
         longitude: position.coords.longitude,
       });
-      setPermissionDenied(false);
       setPermissionStatusChecked(true);
+      setIsLoading(false);
     };
 
     // Função de erro caso o usuário não permita que algo aconteça
     const handleError = (error: GeolocationPositionError) => {
       if (error.code === error.PERMISSION_DENIED) {
-        setPermissionDenied(true);
-        setPermissionStatusChecked(true);
+        setPermissionStatusChecked(false);
       }
     };
 
     navigator.geolocation.getCurrentPosition(getCoords, handleError);
-  }, []);
+  }, [setIsLoading, permissionStatusChecked]);
 
-  return { geolocation, permissionDenied, permissionStatusChecked };
+  return { geolocation, permissionStatusChecked };
 };
 
 export default useGeolocation;
