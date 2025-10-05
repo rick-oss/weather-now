@@ -11,7 +11,7 @@ import { useWeather } from "../../context/WeatherContext";
 import { getWeatherIcon } from "../../utils/getWeatherIcon";
 
 function HourlyForecast() {
-  const { hourlyForecast, utcOffset } = useWeather();
+  const { hourlyForecast, utcOffset, isLoading } = useWeather();
 
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const [activeDay, setActiveDay] = useState<string | null>(null);
@@ -34,7 +34,7 @@ function HourlyForecast() {
       <header className={styles.header_hourly_forecast}>
         <h3>Hourly forecast</h3>
         <button onClick={() => setIsDropdownOpen(!isDropdownOpen)}>
-          <span>{activeDay}</span>
+          <span>{isLoading ? "-" : activeDay}</span>
           <img src={iconDropDown} alt="" />
         </button>
         {isDropdownOpen && <DaysDropdown isOpen={isDropdownOpen} selectedDay={activeDay} onSelectDay={setActiveDay} />}
