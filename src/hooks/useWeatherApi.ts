@@ -17,6 +17,7 @@ export function useWeatherApi() {
     setHourlyForecast,
     setUtcOffset,
     setRegion,
+    setIsLoading,
   } = useWeather();
   const { geolocation } = useGeolocation();
 
@@ -58,6 +59,8 @@ export function useWeatherApi() {
   useEffect(() => {
     async function fetchWeather() {
       if (location?.latitude && location?.longitude) {
+        setIsLoading(true);
+
         try {
           const response = await fetch(url);
           const data = await response.json();
@@ -139,6 +142,8 @@ export function useWeatherApi() {
           setHourlyForecast(grouped);
         } catch (error) {
           console.log(error);
+        } finally {
+          setIsLoading(false);
         }
       }
     }
@@ -152,6 +157,7 @@ export function useWeatherApi() {
     setDailyForecast,
     setHourlyForecast,
     setUtcOffset,
+    setIsLoading,
   ]);
 
   useEffect(() => {
@@ -168,6 +174,8 @@ export function useWeatherApi() {
           }
         } catch (err) {
           console.log("Erro ao buscar cidade:", err);
+        } finally {
+          setIsLoading(false);
         }
       }
     }
@@ -175,5 +183,5 @@ export function useWeatherApi() {
     if (location?.latitude != null && location?.longitude != null) {
       getRegion(location.latitude, location.longitude);
     }
-  }, [location, setRegion]);
+  }, [location, setRegion, setIsLoading]);
 }
