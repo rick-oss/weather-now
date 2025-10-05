@@ -6,7 +6,7 @@
 }
 
 .input_search_bar {
-  width: 532px;
+  width: 526px;
   height: 56px;
   font-size: 19px;
   padding: 16px 24px 16px 60px;
@@ -48,13 +48,14 @@
 .suggestions_search_bar {
   position: absolute;
   list-style: none;
-  width: 532px;
+  width: 526px;
   top: 65px;
   left: 0;
   padding: 8px;
   border-radius: 12px;
   background-color: var(--neutral-800);
   border: 1px solid var(--neutral-700);
+  z-index: 2;
 }
 
 .suggestions_search_bar li {
