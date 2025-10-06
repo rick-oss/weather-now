@@ -20,9 +20,9 @@ function Header() {
           setIsDropdownOpen(!isDropdownOpen);
         }}
       >
-        <img src={iconUnits} alt="" />
+        <img src={iconUnits} alt="" className={styles.icon_units} />
         <span>Units</span>
-        <img src={iconDropdown} alt="" />
+        <img src={iconDropdown} className={styles.icon_dropdown} alt="" />
       </button>
 
       {isDropdownOpen && <UnitsDropdown isOpen={isDropdownOpen} />}
