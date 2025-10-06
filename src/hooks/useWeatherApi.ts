@@ -1,25 +1,26 @@
 import { useEffect } from "react";
 import useGeolocation from "./useGeolocation.ts";
-import { useWeather } from "../context/WeatherContext.ts";
-import type { GroupedHourly } from "../context/WeatherContext.ts";
+import type { WeatherApiProps } from "../types/weather.ts";
+import type { GroupedHourlyType } from "../types/weather";
 
 import mapboxgl from "mapbox-gl";
 
 mapboxgl.accessToken = import.meta.env.VITE_MAPBOX_API_KEY;
 
-export function useWeatherApi() {
-  const {
-    units,
-    location,
-    setLocation,
-    setCurrentForecast,
-    setDailyForecast,
-    setHourlyForecast,
-    setUtcOffset,
-    setRegion,
-    setIsLoading,
-  } = useWeather();
-  const { geolocation } = useGeolocation();
+export function useWeatherApi({
+  units,
+  location,
+  setLocation,
+  setCurrentForecast,
+  setDailyForecast,
+  setHourlyForecast,
+  setUtcOffset,
+  setRegion,
+  setIsLoading,
+  setError,
+  setIsSearchProgress,
+}: WeatherApiProps) {
+  const { geolocation, permissionStatusChecked } = useGeolocation();
 
   const params = {
     latitude: location?.latitude,
@@ -50,6 +51,21 @@ export function useWeatherApi() {
     return day.toLocaleDateString("en-US", { weekday: "long" });
   }
 
+  function formatPrecipitation(value: number) {
+    if (value === 0) return "0";
+    if (Number.isInteger(value)) return value.toString();
+    if (value < 0.1) return value.toFixed(2); // tipo 0.04 → "0.04"
+    return value.toFixed(1); // tipo 0.4 → "0.4"
+  }
+
+  useEffect(() => {
+    if (permissionStatusChecked && location) {
+      setIsLoading(false);
+    } else {
+      setIsLoading(true);
+    }
+  });
+
   useEffect(() => {
     if (geolocation.latitude && geolocation.longitude) {
       setLocation(geolocation);
@@ -60,6 +76,7 @@ export function useWeatherApi() {
     async function fetchWeather() {
       if (location?.latitude && location?.longitude) {
         setIsLoading(true);
+        setIsSearchProgress(true);
 
         try {
           const response = await fetch(url);
@@ -96,7 +113,7 @@ export function useWeatherApi() {
             feelsLike: Math.round(data.hourly.apparent_temperature[currentHourIndex]),
             humidity: data.hourly.relative_humidity_2m[currentHourIndex],
             windSpeed: Math.round(data.hourly.wind_speed_10m[currentHourIndex]),
-            precipitation: data.hourly.precipitation[currentHourIndex],
+            precipitation: formatPrecipitation(data.hourly.precipitation[currentHourIndex]),
             weatherCode: data.hourly.weather_code[currentHourIndex],
           };
           setCurrentForecast(currentForecast);
@@ -120,7 +137,7 @@ export function useWeatherApi() {
           const hourlyTemperature = data.hourly.temperature_2m;
           const hourlyWeatherCode = data.hourly.weather_code;
 
-          const grouped = data.hourly.time.reduce((acc: GroupedHourly, t: string, i: number) => {
+          const grouped = data.hourly.time.reduce((acc: GroupedHourlyType, t: string, i: number) => {
             const [data, hora] = t.split("T");
             const dayWeek = longWeekday(data);
 
@@ -138,12 +155,14 @@ export function useWeatherApi() {
             acc[dayWeek].push(forecast);
 
             return acc;
-          }, {} as GroupedHourly);
+          }, {} as GroupedHourlyType);
           setHourlyForecast(grouped);
-        } catch (error) {
-          console.log(error);
+          setError(false);
+        } catch {
+          setError(true);
         } finally {
           setIsLoading(false);
+          setIsSearchProgress(false);
         }
       }
     }
@@ -158,6 +177,8 @@ export function useWeatherApi() {
     setHourlyForecast,
     setUtcOffset,
     setIsLoading,
+    setError,
+    setIsSearchProgress,
   ]);
 
   useEffect(() => {
