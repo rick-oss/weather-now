@@ -1,4 +1,5 @@
 import { createContext, useContext } from "react";
+
 export interface CurrentWeather {
   dateInfo: string;
   temperature: number;
@@ -18,7 +19,7 @@ export interface DailyWeather {
   }[];
 }
 
-interface HourlyWeather {
+export interface HourlyWeather {
   hour: string;
   currentHour: string;
   temperature: number;
@@ -28,7 +29,7 @@ export type GroupedHourly = Record<string, HourlyWeather[]>;
 
 export type UnitMode = "metric" | "imperial";
 
-type Units = {
+export type Units = {
   temperature: "celsius" | "fahrenheit";
   windSpeed: "kmh" | "mph";
   precipitation: "mm" | "inch";
@@ -52,8 +53,12 @@ export interface WeatherContextType {
   setRegion: (city: string) => void;
   isLoading: boolean;
   setIsLoading: (loading: boolean) => void;
+  isSearchProgress: boolean;
+  setIsSearchProgress: (searchLoading: boolean) => void;
   utcOffset: number | null;
   setUtcOffset: (offset: number) => void;
+  error: boolean;
+  setError: (error: boolean) => void;
   unitMode: UnitMode;
   setUnitMode: React.Dispatch<React.SetStateAction<UnitMode>>;
   units: Units;
