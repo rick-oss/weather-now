@@ -3,6 +3,7 @@ import { useWeather } from "../../context/WeatherContext";
 
 import styles from "./SearchBar.module.css";
 import iconSearch from "../../assets/icon-search.svg";
+import iconLoading from "../../assets/icon-loading.svg";
 
 import mapboxgl from "mapbox-gl";
 
@@ -21,7 +22,7 @@ function SearchBar() {
   const [results, setResults] = useState<MapBoxData[]>([]);
   const [animationShake, setAnimationShake] = useState(false);
 
-  const { setLocation } = useWeather();
+  const { setLocation, isSearchProgress } = useWeather();
 
   useEffect(() => {
     if (searchPlace) {
@@ -89,6 +90,12 @@ function SearchBar() {
             </li>
           ))}
         </ul>
+      )}
+      {isSearchProgress && (
+        <div className={styles.search_progress}>
+          <img src={iconLoading} alt="" />
+          <p>Search in Progress</p>
+        </div>
       )}
     </div>
   );
