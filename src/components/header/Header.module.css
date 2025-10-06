@@ -22,3 +22,27 @@
 .button_units span {
   font-size: 1.1em;
 }
+
+@media (max-width: 412px) {
+  .image_logo {
+    width: 138px;
+  }
+
+  .button_units {
+    padding: 8px 8.3px;
+    gap: 6px;
+  }
+
+  .button_units .icon_units {
+    width: 14px;
+  }
+
+  .button_units .icon_dropdown {
+    width: 9px;
+    height: 14px;
+  }
+
+  .button_units span {
+    font-size: 14px;
+  }
+}

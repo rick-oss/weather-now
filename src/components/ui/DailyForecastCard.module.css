@@ -31,3 +31,17 @@
 .temp_min {
   color: var(--neutral-200);
 }
+
+@media (max-width: 800px) {
+  .daily_card {
+    width: 89px;
+    padding: 16px 8px;
+  }
+}
+
+@media (max-width: 412px) {
+  .daily_card {
+    width: 103px;
+    padding: 16px 8px;
+  }
+}

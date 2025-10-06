@@ -10,5 +10,9 @@
 .cards_daily_forecast {
   display: flex;
   gap: 16px;
+  flex-wrap: wrap;
   margin-top: 22px;
+}
+
+@media (max-width: 800px) {
 }

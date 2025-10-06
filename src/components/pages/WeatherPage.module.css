@@ -9,9 +9,46 @@
 .wrapper_content {
   display: flex;
   gap: 32px;
+  flex-wrap: wrap;
   margin-top: 48px;
 }
 
 .left_content {
   max-width: 800px;
+}
+
+.recent_cities {
+  display: flex;
+  justify-content: center;
+  gap: 16px;
+  list-style: none;
+  margin-top: 32px;
+  border: 1px solid red;
+}
+
+.recent_cities li {
+  padding: 16px 16px;
+  border-radius: 8px;
+  background: var(--neutral-800);
+  border: 1px solid var(--neutral-600);
+}
+
+@media (max-width: 1280px) {
+  .wrapper_content {
+    justify-content: center;
+  }
+}
+
+@media (max-width: 800px) {
+  .weather_page h1 {
+    margin: 48px 0;
+  }
+
+  .wrapper_content {
+    width: 100%;
+  }
+
+  .left_content {
+    width: 100%;
+  }
 }

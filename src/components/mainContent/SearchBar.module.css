@@ -6,7 +6,7 @@
 }
 
 .input_search_bar {
-  width: 526px;
+  width: 532px;
   height: 56px;
   font-size: 19px;
   padding: 16px 24px 16px 60px;
@@ -74,6 +74,28 @@
   background-color: var(--neutral-700);
 }
 
+.search_progress {
+  position: absolute;
+  width: 532px;
+  display: flex;
+  justify-content: left;
+  top: 70px;
+  left: 0;
+  padding: 16px 24px 16px 15px;
+  border-radius: 12px;
+  background-color: var(--neutral-800);
+  border: 1px solid var(--neutral-700);
+}
+
+.search_progress img {
+  animation: rotate 1.4s infinite;
+}
+
+.search_progress p {
+  margin-left: 10px;
+  font-size: 15px;
+}
+
 /*Animation for input when invalid place */
 .shake_animation {
   animation: shake 0.5s ease;
@@ -97,5 +119,44 @@
   }
   100% {
     transform: translateX(0);
+  }
+}
+
+@keyframes rotate {
+  from {
+    transform: rotate(0deg);
+  }
+
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@media (max-width: 882px) {
+  .search_bar {
+    width: 100%;
+  }
+
+  .input_search_bar,
+  .search_progress {
+    width: 85%;
+  }
+
+  .search_progress {
+    width: 100%;
+  }
+}
+
+@media (max-width: 412px) {
+  .search_bar {
+    flex-direction: column;
+  }
+
+  .input_search_bar {
+    width: 100%;
+  }
+
+  .button_search_bar {
+    width: 100%;
   }
 }
