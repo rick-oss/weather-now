@@ -89,7 +89,7 @@ function SearchBar() {
         className={`${styles.input_search_bar} ${animationShake ? styles.shake_animation : ""}`}
         type="text"
         name="search"
-        value={searchPlace}
+        value={searchSelectedPlace ? searchSelectedPlace : searchPlace}
         placeholder="Search for a place..."
         onChange={(e) => setSearchPlace(e.target.value)}
       />
