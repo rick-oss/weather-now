@@ -73,8 +73,15 @@ function SearchBar() {
       latitude: lat,
       longitude: long,
     });
-    setSearchPlace("");
+    setSearchSelectedPlace("");
   }
+
+  const formatPlaceName = (cityName: string) => {
+    const parts = cityName.split(",").map((part: string) => part.trim());
+    const formattedPlace = `${parts[0]}, ${parts[parts.length - 1]}`;
+
+    return formattedPlace;
+  };
 
   return (
     <div className={`${styles.search_bar}`}>
