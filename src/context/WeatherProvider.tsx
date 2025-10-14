@@ -25,7 +25,7 @@ export function WeatherProvider({ children }: { children: ReactNode }) {
   const [utcOffset, setUtcOffset] = useState<number | null>(null);
   const [region, setRegion] = useState<string | null>(null);
   const [isLoading, setIsLoading] = useState(false);
-  const [isSearchProgress, setIsSearchProgress] = useState(false);
+  const [isSearching, setIsSearching] = useState(false);
   const [unitMode, setUnitMode] = useState<UnitMode>("metric");
   const [error, setError] = useState(false);
 
@@ -41,7 +41,6 @@ export function WeatherProvider({ children }: { children: ReactNode }) {
     setRegion,
     setIsLoading,
     setError,
-    setIsSearchProgress,
   });
 
   return (
@@ -59,8 +58,8 @@ export function WeatherProvider({ children }: { children: ReactNode }) {
         setRegion,
         isLoading,
         setIsLoading,
-        isSearchProgress,
-        setIsSearchProgress,
+        isSearching,
+        setIsSearching,
         utcOffset,
         setUtcOffset,
         unitMode,
