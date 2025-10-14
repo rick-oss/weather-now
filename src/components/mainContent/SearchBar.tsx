@@ -98,11 +98,11 @@ function SearchBar() {
       </i>
       <button
         onClick={() => {
-          if (results.length === 0) {
+          if (!searchSelectedPlace) {
             setAnimationShake(true);
             setTimeout(() => setAnimationShake(false), 500);
           }
-          handleSelectPlace(results[0].geometry.coordinates[1], results[0].geometry.coordinates[0]);
+          handleSelectPlace(searchPlaceCoordinates.latitude, searchPlaceCoordinates.longitude);
         }}
         className={styles.button_search_bar}
       >
