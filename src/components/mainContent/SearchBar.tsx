@@ -54,18 +54,19 @@ function SearchBar() {
           );
           const data = await response.json();
 
-          console.log(data);
           setResults(data.features);
         } catch (err) {
           console.log("Error fetching suggestions:", err);
+        } finally {
+          setIsSearching(false);
         }
       }
 
       getSuggestions();
-    } else {
-      setResults([]); // Limpa as sugestôes se não houver texto no input
-    }
-  }, [searchPlace]); // Roda sempre que searchPlace muda
+    }, 200);
+
+    return () => clearTimeout(delay); // Limpa o time se digitar dinovo
+  }, [searchPlace, setIsSearching]); // Roda sempre que searchPlace muda
 
   function handleSelectPlace(lat: number, long: number) {
     setLocation({
