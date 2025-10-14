@@ -17,15 +17,36 @@ type MapBoxData = {
   };
 };
 
+type PlaceCoordinates = {
+  latitude: number;
+  longitude: number;
+};
+
 function SearchBar() {
   const [searchPlace, setSearchPlace] = useState("");
+  const [searchSelectedPlace, setSearchSelectedPlace] = useState("");
+  const [searchPlaceCoordinates, setSearchPlaceCoordinates] = useState<PlaceCoordinates>({
+    latitude: 0,
+    longitude: 0,
+  });
   const [results, setResults] = useState<MapBoxData[]>([]);
   const [animationShake, setAnimationShake] = useState(false);
 
-  const { setLocation, isSearchProgress } = useWeather();
+  const { setLocation, isSearching, setIsSearching } = useWeather();
+
+  // cria variável booleana para mostrar "No results"
+  const showNoResults = results.length === 0 && searchPlace && !isSearching;
 
   useEffect(() => {
-    if (searchPlace) {
+    if (!searchPlace) {
+      setResults([]);
+      setIsSearching(false);
+      return;
+    }
+
+    setIsSearching(true);
+    setResults([]);
+    const delay = setTimeout(() => {
       async function getSuggestions() {
         try {
           const response = await fetch(
