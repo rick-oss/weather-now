@@ -113,9 +113,16 @@ function SearchBar() {
           {results?.map((result) => (
             <li
               key={result.id}
-              onClick={() => handleSelectPlace(result.geometry.coordinates[1], result.geometry.coordinates[0])}
+              onClick={() => [
+                setSearchPlace(""),
+                setSearchSelectedPlace(formatPlaceName(result.place_name)),
+                setSearchPlaceCoordinates({
+                  latitude: result.geometry.coordinates[1],
+                  longitude: result.geometry.coordinates[0],
+                }),
+              ]}
             >
-              {result.place_name}
+              {formatPlaceName(result.place_name)}
             </li>
           ))}
         </ul>
