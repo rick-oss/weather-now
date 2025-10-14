@@ -18,7 +18,6 @@ export function useWeatherApi({
   setRegion,
   setIsLoading,
   setError,
-  setIsSearchProgress,
 }: WeatherApiProps) {
   const { geolocation, permissionStatusChecked } = useGeolocation();
 
@@ -76,7 +75,6 @@ export function useWeatherApi({
     async function fetchWeather() {
       if (location?.latitude && location?.longitude) {
         setIsLoading(true);
-        setIsSearchProgress(true);
 
         try {
           const response = await fetch(url);
@@ -162,7 +160,6 @@ export function useWeatherApi({
           setError(true);
         } finally {
           setIsLoading(false);
-          setIsSearchProgress(false);
         }
       }
     }
@@ -178,7 +175,6 @@ export function useWeatherApi({
     setUtcOffset,
     setIsLoading,
     setError,
-    setIsSearchProgress,
   ]);
 
   useEffect(() => {
@@ -189,9 +185,12 @@ export function useWeatherApi({
             `https://api.mapbox.com/geocoding/v5/mapbox.places/${lon},${lat}.json?types=place&access_token=${mapboxgl.accessToken}&limit=1`
           );
           const data = await response.json();
+
           if (data.features.length > 0) {
-            const city = data.features[0].place_name;
-            setRegion(city);
+            const place = data.features[0].place_name;
+            const parts = place.split(",").map((part: string) => part.trim());
+            const formatted = `${parts[0]}, ${parts[parts.length - 1]}`;
+            setRegion(formatted);
           }
         } catch (err) {
           console.log("Erro ao buscar cidade:", err);
