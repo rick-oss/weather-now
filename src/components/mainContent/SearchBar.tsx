@@ -127,12 +127,13 @@ function SearchBar() {
           ))}
         </ul>
       )}
-      {isSearchProgress && (
-        <div className={styles.search_progress}>
+      {isSearching && (
+        <div className={styles.search_progress_bar}>
           <img src={iconLoading} alt="" />
           <p>Search in Progress</p>
         </div>
       )}
+      {showNoResults && <p className={styles.no_results_bar}>No results</p>}
     </div>
   );
 }
