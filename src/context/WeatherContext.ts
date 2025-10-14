@@ -53,8 +53,8 @@ export interface WeatherContextType {
   setRegion: (city: string) => void;
   isLoading: boolean;
   setIsLoading: (loading: boolean) => void;
-  isSearchProgress: boolean;
-  setIsSearchProgress: (searchLoading: boolean) => void;
+  isSearching: boolean;
+  setIsSearching: (searchLoading: boolean) => void;
   utcOffset: number | null;
   setUtcOffset: (offset: number) => void;
   error: boolean;
