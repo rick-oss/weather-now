@@ -74,12 +74,13 @@
   background-color: var(--neutral-700);
 }
 
-.search_progress {
+.search_progress_bar,
+.no_results_bar {
   position: absolute;
   width: 532px;
   display: flex;
   justify-content: left;
-  top: 70px;
+  top: 60px;
   left: 0;
   padding: 16px 24px 16px 15px;
   border-radius: 12px;
@@ -87,13 +88,17 @@
   border: 1px solid var(--neutral-700);
 }
 
-.search_progress img {
+.search_progress_bar img {
   animation: rotate 1.4s infinite;
 }
 
-.search_progress p {
+.search_progress_bar p {
   margin-left: 10px;
   font-size: 15px;
+}
+
+.no_results_bar {
+  padding-left: 20px;
 }
 
 /*Animation for input when invalid place */
@@ -138,11 +143,11 @@
   }
 
   .input_search_bar,
-  .search_progress {
+  .search_progress_bar {
     width: 85%;
   }
 
-  .search_progress {
+  .search_progress_bar {
     width: 100%;
   }
 }
