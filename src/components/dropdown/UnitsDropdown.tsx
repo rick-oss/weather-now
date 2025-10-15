@@ -5,7 +5,12 @@ import styles from "./UnitsDropdown.module.css";
 import UnitCard from "./UnitCard";
 import { useWeather } from "../../context/WeatherContext";
 
-function UnitsDropdown({ isOpen }: { isOpen: boolean }) {
+interface UnitsDropdownProps {
+  isOpen: boolean;
+  onSetDropdown: (isOpen: boolean) => void;
+}
+
+function UnitsDropdown({ isOpen, onSetDropdown }: UnitsDropdownProps) {
   const [isVisible, setIsVisible] = useState(false);
   const { unitMode, setUnitMode } = useWeather();
 
@@ -18,13 +23,17 @@ function UnitsDropdown({ isOpen }: { isOpen: boolean }) {
 
   if (!isOpen) return null;
 
+  const handleUnitChangeAndClose = () => {
+    setIsVisible(false);
+    setTimeout(() => {
+      onSetDropdown(false);
+    }, 300);
+    setUnitMode((prev) => (prev === "metric" ? "imperial" : "metric"));
+  };
+
   return (
     <div className={`${styles.units_dropdown} ${isVisible ? styles.show : ""}`}>
-      <button
-        onClick={() => {
-          setUnitMode((prev) => (prev === "metric" ? "imperial" : "metric"));
-        }}
-      >
+      <button onClick={() => handleUnitChangeAndClose()}>
         <span>Switch to {unitMode === "metric" ? "imperial" : "metric"}</span>
       </button>
       <UnitCard title="Temperature" option1="Celsius (°C)" option2="Fahrenheit (°F)" unit={unitMode} />

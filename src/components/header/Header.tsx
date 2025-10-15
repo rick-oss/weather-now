@@ -25,7 +25,7 @@ function Header() {
         <img src={iconDropdown} className={styles.icon_dropdown} alt="" />
       </button>
 
-      {isDropdownOpen && <UnitsDropdown isOpen={isDropdownOpen} />}
+      {isDropdownOpen && <UnitsDropdown isOpen={isDropdownOpen} onSetDropdown={setIsDropdownOpen} />}
     </header>
   );
 }

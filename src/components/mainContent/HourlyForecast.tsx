@@ -37,7 +37,7 @@ function HourlyForecast() {
           <span>{isLoading ? "-" : activeDay}</span>
           <img src={iconDropDown} alt="" />
         </button>
-        {isDropdownOpen && <DaysDropdown isOpen={isDropdownOpen} selectedDay={activeDay} onSelectDay={setActiveDay} />}
+        {isDropdownOpen && <DaysDropdown isOpen={isDropdownOpen} onSetDropdown={setIsDropdownOpen} selectedDay={activeDay} onSelectDay={setActiveDay} />}
       </header>
       {activeDay &&
         hourlyForecast?.[activeDay]

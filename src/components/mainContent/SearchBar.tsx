@@ -76,6 +76,12 @@ function SearchBar() {
     setSearchSelectedPlace("");
   }
 
+  function handleSearchPlaceAndCoords(placeName: string, lat: number, long: number) {
+    setSearchPlace("");
+    setSearchSelectedPlace(formatPlaceName(placeName));
+    setSearchPlaceCoordinates({ latitude: lat, longitude: long });
+  }
+
   const formatPlaceName = (cityName: string) => {
     const parts = cityName.split(",").map((part: string) => part.trim());
     const formattedPlace = `${parts[0]}, ${parts[parts.length - 1]}`;
@@ -91,7 +97,10 @@ function SearchBar() {
         name="search"
         value={searchSelectedPlace ? searchSelectedPlace : searchPlace}
         placeholder="Search for a place..."
-        onChange={(e) => setSearchPlace(e.target.value)}
+        onChange={(e) => {
+          setSearchPlace(e.target.value);
+          if (searchSelectedPlace) setSearchSelectedPlace("");
+        }}
       />
       <i className={`${styles.icon_search_bar} ${animationShake ? styles.shake_animation : ""}`}>
         <img src={iconSearch} alt="" />
@@ -113,14 +122,13 @@ function SearchBar() {
           {results?.map((result) => (
             <li
               key={result.id}
-              onClick={() => [
-                setSearchPlace(""),
-                setSearchSelectedPlace(formatPlaceName(result.place_name)),
-                setSearchPlaceCoordinates({
-                  latitude: result.geometry.coordinates[1],
-                  longitude: result.geometry.coordinates[0],
-                }),
-              ]}
+              onClick={() =>
+                handleSearchPlaceAndCoords(
+                  result.place_name,
+                  result.geometry.coordinates[1],
+                  result.geometry.coordinates[0]
+                )
+              }
             >
               {formatPlaceName(result.place_name)}
             </li>
