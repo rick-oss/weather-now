@@ -4,6 +4,7 @@ import WeatherDetailsCard from "../ui/WeatherDetailsCard";
 
 import { useWeather } from "../../context/WeatherContext";
 import { getWeatherIcon } from "../../utils/getWeatherIcon";
+import { getWeatherBackground } from "../../utils/getWeatherBackground";
 
 function WeatherInfo() {
   const { currentForecast, region, isLoading, unitMode } = useWeather();
@@ -21,6 +22,13 @@ function WeatherInfo() {
         </div>
       ) : (
         <div className={styles.weather_main_info}>
+          <video
+            src={getWeatherBackground(currentForecast?.weatherCode ?? 0)}
+            autoPlay
+            loop
+            muted
+            className={styles.weather_video}
+          />
           <div className={styles.weather_location}>
             <h2>{region}</h2>
             <p>{currentForecast?.dateInfo}</p>
