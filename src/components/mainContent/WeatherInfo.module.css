@@ -1,3 +1,7 @@
+.weather_info {
+  position: relative;
+}
+
 .weather_main_info,
 .loading {
   height: 286px;
@@ -8,7 +12,6 @@
 }
 
 .weather_main_info {
-  position: relative;
   justify-content: space-between;
   padding: 0 24px;
   z-index: 0;
@@ -19,10 +22,16 @@
   top: 0;
   left: 0;
   width: 100%;
-  height: 100%;
+  height: 286px;
   object-fit: cover;
   border-radius: 12px;
+  opacity: 0;
   z-index: -1;
+  transition: opacity 0.4s ease;
+}
+
+.weather_video.visible {
+  opacity: 1;
 }
 
 .loading {
