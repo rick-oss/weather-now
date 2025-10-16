@@ -145,9 +145,3 @@
     margin-top: 20px;
   }
 }
-
-@media (max-width: 375px) {
-  .weather_main_info {
-    background: url("../../assets/bg-today-small.svg");
-  }
-}

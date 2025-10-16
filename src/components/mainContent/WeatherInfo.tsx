@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import styles from "./WeatherInfo.module.css";
 
 import WeatherDetailsCard from "../ui/WeatherDetailsCard";
@@ -8,6 +9,17 @@ import { getWeatherBackground } from "../../utils/getWeatherBackground";
 
 function WeatherInfo() {
   const { currentForecast, region, isLoading, unitMode } = useWeather();
+
+  useEffect(() => {
+    if (!isLoading) {
+      // força o Chrome a repintar o layout
+      requestAnimationFrame(() => {
+        document.body.style.transform = "translateZ(0)";
+        const _ = document.body.offsetHeight; // força reflow
+        document.body.style.transform = "";
+      });
+    }
+  }, [isLoading]);
 
   return (
     <section className={styles.weather_info}>
